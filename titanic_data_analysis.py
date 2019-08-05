@@ -2,6 +2,8 @@
 # in order to predict the fate of Titanic passengers. Since the data is already given and filled, this code
 # and data can be used to test the accuracy of the algorithm (for this dataset)
 
+# Alternatively, these steps can be performed in an IPython notebook (or Jupyter) to make visualization easier
+
 # Making necessary package imports
 
 
@@ -28,7 +30,7 @@ plt.show()
 
 # Upon inspection, we observe that PassengerID is just a sequence, Name and Ticket are random strings
 # and Fare is probably a consequence of Pclass, so those columns can be dropped as they do not
-# affect our Target class, which is Survived (Target class is what we're trying to make our computer predict
+# affect our Target class, which is Survived
 # From the heatmap, we also observe that Cabin has many missing values, so we should drop that as well
 
 ttnc.drop(['Name', 'PassengerId', 'Ticket', 'Fare', 'Cabin'], axis=1, inplace=True)
