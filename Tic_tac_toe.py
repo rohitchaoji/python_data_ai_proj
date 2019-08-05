@@ -1,11 +1,25 @@
+# This Tic Tac Toe game draws directly in the console output of Python.
+# Which means this game must be played on either an IDE or the Terminal.
+# (ie, you need some way to output the print function)
+
+# This works in a turn-based format where each player must input the position
+# of their marker every alternating turn.
+
+# The players must decide between themselves which mark they want to pick
+# rather than keeping distinct Player 1 and Player 2 roles and having them
+# choose X or O before the game.
+
 import random
+
+# Importing the "random" module to generate random numbers
 
 
 def display_board(board):
+    # A function used to print the board. It is called after each turn to reflect all previous moves
+    # Prints each element of the board in a single line with spaces.
+    # Prints a newline character after every third index.
     print("\n")
     for i in range(1, len(board)):
-        # Prints each element of the board in a single line with spaces.
-        # Prints a newline character after every third index.
         if i % 3 == 0:
             print(board[i], "\n")
         else:
@@ -13,6 +27,8 @@ def display_board(board):
 
 
 def place_marker(board, marker, pos):
+    # The function is called on the board, marker and marked position
+    # This changes the original list by adding the marker to the position
     board[pos] = marker
 
 
@@ -47,14 +63,18 @@ def choose_first():
 
 
 def space_check(board, pos):
+    # This function checks whether the given position is already full
     return board[pos] == "-"
 
 
 def full_board_check(board):
+    # This function checks if the board has filled up before the game ends by checking for empty spaces
     return "-" not in board
 
 
 def player_choice(board):
+    # This function asks the current player (marker) to input the position where they would like to add their next mark
+    # The game must prompt the player constantly until they make a valid choice. This is done by the following while loop.
     while True:
         try:
             pos = int(input("Where do you want to place your marker (1-9) "))
@@ -74,6 +94,7 @@ def player_choice(board):
 
 
 def replay():
+    # Asks the player(s) if they want to play again. Only accepts Y/y or Yes/YES/yes as positive and everything else as No.
     re = input("Play again? (Y = Yes, Anything else = No) ")
     if re.lower() == "y" or re.lower() == "yes":
         return True
@@ -92,6 +113,8 @@ while True:
     # A string of 10 alternating Xs and Os is used here to cycle between turns.
     # There can be maximum of 9 turns in any given game before the board fills up.
     # Depending on output of choose_first, turnstring is sliced to a string of 9 characters with X or O at index 0.
+    # If "O" is supposed to go first, the turnstring would start with an "O", which means the order is now "OXOXOXOXO"
+    # Otherwise, it starts with an "X", making the order "XOXOXOXOX"
     if choose_first() == "O":
         turnstring = turnstring[:-1]
         # String of 9 letters starting with O.
@@ -104,7 +127,6 @@ while True:
         position = player_choice(game_board)
         place_marker(game_board, turn, position)
         print("\n"*100)
-        # I wrote this on PyCharm so did not use IPython.display to clear the output
         display_board(game_board)
         if win_check(game_board, turn):
             # At the end of the turn, check winning conditions.
